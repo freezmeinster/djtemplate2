@@ -1,4 +1,5 @@
 import os
+from importlib import import_module
 from django.conf import settings
 from django.core.management import call_command
 
@@ -12,7 +13,12 @@ def check_name_conflick(name):
     if name in apps_list:
         return True
     else:
-        return False
+        try:
+            import_module(name)
+        except ImportError:
+            return False
+        else:
+            return True
 
 def run():
     print("========== Hello to app creator ========== \n")
