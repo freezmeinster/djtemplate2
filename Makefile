@@ -10,5 +10,3 @@ initprod:
 	@python manage.py runscript initprod
 cleanmigrations:
 	@python manage.py runscript cleanmigrations
-newapp:
-	@python manage.py runscript newapp
