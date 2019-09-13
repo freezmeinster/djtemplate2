@@ -1,7 +1,9 @@
 from django.db import models
 from django.db.models.query import QuerySet
 from django.db.models.signals import pre_delete, post_delete
-
+from django.utils import timezone
+from django.utils.timezone import now
+from django.utils.translation import ugettext_lazy as _
 
 class DataQuerySet(QuerySet):
     pass
@@ -41,6 +43,12 @@ class DataManager(models.Manager):
 
 
 class BaseModel(models.Model):
+
+    created = models.DateTimeField(
+        _("created"), auto_now_add=True, editable=False, db_index=True
+    )
+    modified = models.DateTimeField(auto_now=True, editable=False)
+    deleted = models.DateTimeField(editable=False, null=True)
 
     objects = DataManager()
 
