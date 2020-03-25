@@ -1,7 +1,3 @@
-"""
-Django settings ARM Django based project
-"""
-
 import os
 import sys
 from django.contrib import messages
@@ -27,7 +23,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
-    'newapp',
+    'background_task',
 ]
 
 MIDDLEWARE = [
@@ -113,6 +109,18 @@ CACHES = {
         'LOCATION': os.path.join(BASE_DIR, "cache"),
         'TIMEOUT' : None
     }
+}
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {"console": {"class": "logging.StreamHandler"}},
+    "loggers": {
+        "django": {
+            "handlers": ["console"],
+            "level": os.getenv("DJANGO_LOG_LEVEL", "INFO"),
+        }
+    },
 }
 
 AUTH_USER_MODEL = "account.User"

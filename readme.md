@@ -1,3 +1,1 @@
-Beberapa Command
-
-newapps
+## Default Django template project. Using django 2.2 as base
